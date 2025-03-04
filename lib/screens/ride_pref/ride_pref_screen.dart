@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:week_3_blabla_project/widgets/actions/bla_button.dart';
 
 import '../../model/ride_pref/ride_pref.dart';
 import '../../service/ride_prefs_service.dart';
 import '../../theme/theme.dart';
+
+import '../../utils/animations_util.dart';
+import '../rides/rides_screen.dart';
 import 'widgets/ride_pref_form.dart';
 import 'widgets/ride_pref_history_tile.dart';
 
@@ -22,12 +24,25 @@ class RidePrefScreen extends StatefulWidget {
 }
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
-  onRidePrefSelected(RidePref ridePref) {
-    // 1 - Navigate to the rides screen (with a buttom to top animation)
+ 
+  onRidePrefSelected(RidePreference newPreference) async {
+
+    // 1 - Update the current preference
+    RidePrefService.instance.setCurrentPreference(newPreference);
+ 
+    // 2 - Navigate to the rides screen (with a buttom to top animation)
+    await Navigator.of(context).push(AnimationUtils.createBottomToTopRoute(RidesScreen()));
+  
+    // 3 - After wait  - Update the state   -- TODO MAKE IT WITH STATE MANAGEMENT
+    setState(() { });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    RidePreference? currentRidePreference = RidePrefService.instance.currentPreference;
+    List<RidePreference> pastPreferences = RidePrefService.instance.getPastPreferences();
+
     return Stack(
       children: [
         // 1 - Background  Image
@@ -36,7 +51,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
         // 2 - Foreground content
         Column(
           children: [
-            SizedBox(height: 16),
+            SizedBox(height: BlaSpacings.m),
             Text(
               "Your pick of rides at low price",
               style: BlaTextStyles.heading.copyWith(color: Colors.white),
@@ -53,9 +68,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   // 2.1 Display the Form to input the ride preferences
-                  RidePrefForm(
-                    initRidePref: RidePrefService.currentRidePref,
-                  ),
+                  RidePrefForm(initialPreference: currentRidePreference, onSubmit: onRidePrefSelected),
                   SizedBox(height: BlaSpacings.m),
 
                   // 2.2 Optionally display a list of past preferences
@@ -64,32 +77,13 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
                     child: ListView.builder(
                       shrinkWrap: true, // Fix ListView height issue
                       physics: AlwaysScrollableScrollPhysics(),
-                      itemCount: RidePrefService.getTodayRidePrefs().length,
+                      itemCount: pastPreferences.length,
                       itemBuilder: (ctx, index) => RidePrefHistoryTile(
-                        ridePref: RidePrefService.getTodayRidePrefs()[index],
-                        onPressed: () => onRidePrefSelected(
-                            RidePrefService.getTodayRidePrefs()[index]),
+                        ridePref: pastPreferences[index],
+                        onPressed: () =>
+                            onRidePrefSelected(pastPreferences[index]),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: BlaSpacings.l),
-                  // 2.3 Display buttons to submit preferences or clear the form
-                  BlaButton(
-                    label: "Request to book",
-                    icon: Icons.calendar_month_sharp,
-                    onPressed: () {
-                      // Handle the submit action
-                    },
-                    type: BlaButtonType.primary,
-                  ),
-                  const SizedBox(height: BlaSpacings.m),
-                  BlaButton(
-                    icon: Icons.message,
-                    label: "Contact Volodia",
-                    onPressed: () {
-                      // Handle the clear form action
-                    },
-                    type: BlaButtonType.secondary,
                   ),
                 ],
               ),

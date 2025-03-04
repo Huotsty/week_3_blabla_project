@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../model/ride_pref/ride_pref.dart';
-import '../theme/theme.dart';
-import '../utils/date_time_util.dart';
-import 'actions/bla_text_button.dart';
+import '../../../model/ride_pref/ride_pref.dart';
+import '../../../theme/theme.dart';
+import '../../../utils/date_time_util.dart';
+import '../../../widgets/actions/bla_text_button.dart';
 
-class RidePrefBar extends StatefulWidget {
+///
+///  A top bar combining the ride preference summary  + the navigation back button
+///  A Filter button appears on the right to filter the view
+///
+class RidePrefBar extends StatelessWidget {
   const RidePrefBar({
     super.key,
-    required this.ridePref,
-    required this.onRidePrefPressed,
+    required this.ridePreference,
+    required this.onBackPressed,
+    required this.onPreferencePressed,
     required this.onFilterPressed,
   });
 
-  final RidePref ridePref;
-  final VoidCallback onRidePrefPressed;
+  final RidePreference ridePreference;
+
+  final VoidCallback onBackPressed;
+  final VoidCallback onPreferencePressed;
   final VoidCallback onFilterPressed;
-
-  @override
-  State<RidePrefBar> createState() => _RidePrefBarState();
-}
-
-class _RidePrefBarState extends State<RidePrefBar> {
-  void onBackPressed() {
-    Navigator.of(context).pop();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class _RidePrefBarState extends State<RidePrefBar> {
       decoration: BoxDecoration(
         color: BlaColors.backgroundAccent,
         borderRadius:
-        BorderRadius.circular(BlaSpacings.radius), // Rounded corners
+            BorderRadius.circular(BlaSpacings.radius), // Rounded corners
       ),
       child: Row(
         children: [
@@ -50,16 +48,15 @@ class _RidePrefBarState extends State<RidePrefBar> {
           // 2 - Ride Summary
           Expanded(
             child: RidePrefSummary(
-              ridePref: widget.ridePref,
-              onPressed: widget.onRidePrefPressed,
+              ridePref: ridePreference,
+              onPressed: onPreferencePressed,
             ),
           ),
 
           // 3 - Filter button
           Padding(
             padding: const EdgeInsets.only(right: 10),
-            child: BlaTextButton(
-                text: "Filter", onPressed: widget.onFilterPressed),
+            child: BlaTextButton(text: "Filter", onPressed: onFilterPressed),
           )
         ],
       ),
@@ -68,7 +65,7 @@ class _RidePrefBarState extends State<RidePrefBar> {
 }
 
 class RidePrefSummary extends StatelessWidget {
-  final RidePref ridePref;
+  final RidePreference ridePref;
   final VoidCallback onPressed;
   const RidePrefSummary(
       {super.key, required this.ridePref, required this.onPressed});
@@ -89,7 +86,7 @@ class RidePrefSummary extends StatelessWidget {
           children: [
             Text(title,
                 style:
-                BlaTextStyles.label.copyWith(color: BlaColors.textNormal)),
+                    BlaTextStyles.label.copyWith(color: BlaColors.textNormal)),
             Text(subTitle,
                 style: BlaTextStyles.label.copyWith(color: BlaColors.textLight))
           ],
