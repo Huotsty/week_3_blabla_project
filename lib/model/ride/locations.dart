@@ -33,6 +33,10 @@ class Location {
   String toString() {
     return name;
   }
+
+  Location.copy(Location other)
+      : name = other.name,
+        country = other.country;
 }
 
 ///
