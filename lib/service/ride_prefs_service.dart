@@ -6,7 +6,7 @@ import '../repository/ride_preferences_repository.dart';
 ////
 ///   This service handles:
 ///   - The past ride preferences
-///   - The currennt ride preferences
+///   - The current ride preferences
 ///
 class RidePrefService {
   // Static private instance
@@ -49,7 +49,7 @@ class RidePrefService {
     print('Get  current  pref : $_currentPreference');
     return _currentPreference;
   }
-
+  // set current preference
   void setCurrentPreference(RidePreference preference) {
     _currentPreference = preference;
     print('Set current pref to $_currentPreference');
