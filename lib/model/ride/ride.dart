@@ -1,4 +1,5 @@
 import 'package:week_3_blabla_project/model/ride/locations.dart';
+import 'package:week_3_blabla_project/service/rides_service.dart';
 
 import '../../utils/date_time_util.dart';
 import '../user/user.dart';
@@ -9,7 +10,10 @@ enum RideStatus {
   ongoing,
   finished;
 }
-
+// enum PetAccepted{
+//   yes,
+//   no
+// }
 ///
 /// This model describes a  Ride.
 ///
@@ -19,6 +23,7 @@ class Ride {
 
   final Location arrivalLocation;
   final DateTime arrivalDateTime;
+  final RidesFilter petAccepted;
 
   final User driver;
 
@@ -30,6 +35,8 @@ class Ride {
   final List<User> passengers = [];
 
   Ride({
+
+    required this.petAccepted,
     required this.departureLocation,
     required this.departureDate,
     required this.arrivalLocation,
