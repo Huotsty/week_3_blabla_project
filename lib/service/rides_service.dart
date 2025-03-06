@@ -1,14 +1,14 @@
 import 'package:week_3_blabla_project/model/ride_pref/ride_pref.dart';
 import 'package:week_3_blabla_project/repository/rides_repository.dart';
 
-import '../dummy_data/dummy_data.dart';
+
 import '../model/ride/ride.dart';
 
 ////
 ///   This service handles:
 ///   - The list of available rides
 ///
-class RidesService {
+class RidesService { 
   //
   // static List<Ride> availableRides = fakeRides;
   //
@@ -46,11 +46,14 @@ class RidesService {
     return repository.getRides(preference, filter);
   }
 
-  static List<Ride> getRidesFor(RidePreference currentPreference) {
-    return _instance!.getRides(currentPreference, null);
+  static List<Ride> getRidesFor(RidePreference currentPreference,  [RidesFilter? newFilter]) {
+    return _instance!.getRides(currentPreference, newFilter);
   }
 }
 class RidesFilter {
   final bool petAccepted;
   RidesFilter({required this.petAccepted});
 }
+class RideSortType{
+  
+} 

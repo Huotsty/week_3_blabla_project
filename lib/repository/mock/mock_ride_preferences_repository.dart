@@ -15,4 +15,5 @@ class MockRidePreferencesRepository extends RidePreferencesRepository {
   void addPreference(RidePreference preference) {
     _pastPreferences.add(preference);
   }
+
 }

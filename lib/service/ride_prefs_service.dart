@@ -1,5 +1,3 @@
-import 'package:week_3_blabla_project/repository/mock/mock_ride_preferences_repository.dart';
-
 import '../model/ride_pref/ride_pref.dart';
 import '../repository/ride_preferences_repository.dart';
 
@@ -39,20 +37,22 @@ class RidePrefService {
   ///
   static RidePrefService get instance {
     if (_instance == null) {
-		  throw Exception("RidePreferencesService is not initialized. Call initialize() first.");
-		}
-		return _instance!;
+      throw Exception(
+          "RidePreferencesService is not initialized. Call initialize() first.");
+    }
+    return _instance!;
   }
 
   // Current preference
   RidePreference? get currentPreference {
-    print('Get  current  pref : $_currentPreference');
+    print('Get current preference: $_currentPreference');
     return _currentPreference;
   }
-  // set current preference
+
+  // Set current preference
   void setCurrentPreference(RidePreference preference) {
     _currentPreference = preference;
-    print('Set current pref to $_currentPreference');
+    print('Set current preference to $_currentPreference');
   }
 
   // Past preferences
@@ -61,6 +61,6 @@ class RidePrefService {
   }
 
   void addPreference(RidePreference preference) {
-    return repository.addPreference(preference);
+    repository.addPreference(preference);
   }
 }

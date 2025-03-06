@@ -24,7 +24,7 @@ class RidePrefScreen extends StatefulWidget {
 }
 
 class _RidePrefScreenState extends State<RidePrefScreen> {
- 
+
   onRidePrefSelected(RidePreference newPreference) async {
 
     // 1 - Update the current preference
@@ -32,7 +32,7 @@ class _RidePrefScreenState extends State<RidePrefScreen> {
  
     // 2 - Navigate to the rides screen (with a buttom to top animation)
     await Navigator.of(context).push(AnimationUtils.createBottomToTopRoute(RidesScreen()));
-  
+    // currentPreference: RidePrefService.instance.currentPreference!,)
     // 3 - After wait  - Update the state   -- TODO MAKE IT WITH STATE MANAGEMENT
     setState(() { });
   }

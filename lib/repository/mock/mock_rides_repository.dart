@@ -8,7 +8,7 @@ import '../../model/user/user.dart';
 
 class MockRidesRepository extends RidesRepository {
   // Mock users
-  final List<User> users = [
+  final List<User> driver = [
     User(
       firstName: "Kannika",
       lastName: "Sok",
@@ -62,7 +62,7 @@ class MockRidesRepository extends RidesRepository {
         arrivalLocation: Location(name: "Siem Reap", country: Country.cambodia),
         departureDate: DateTime.now().add(Duration(hours: 5, minutes: 30)),
         arrivalDateTime: DateTime.now().add(Duration(hours: 7, minutes: 30)),
-        driver: users[0],
+        driver: driver[0],
         availableSeats: 2,
         pricePerSeat: 10.0,
         petAccepted: RidesFilter(petAccepted: false),
@@ -73,7 +73,7 @@ class MockRidesRepository extends RidesRepository {
         arrivalLocation: Location(name: "Siem Reap", country: Country.cambodia),
         departureDate: DateTime.now().add(Duration(hours: 20)),
         arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
-        driver: users[1],
+        driver: driver[1],
         availableSeats: 0,
         pricePerSeat: 12.0,
         petAccepted: RidesFilter(petAccepted: false),
@@ -84,7 +84,7 @@ class MockRidesRepository extends RidesRepository {
         arrivalLocation: Location(name: "Siem Reap", country: Country.cambodia),
         departureDate: DateTime.now().add(Duration(hours: 5)),
         arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
-        driver: users[2],
+        driver: driver[2],
         availableSeats: 1,
         pricePerSeat: 8.0,
         petAccepted: RidesFilter(petAccepted: false),
@@ -95,7 +95,7 @@ class MockRidesRepository extends RidesRepository {
         arrivalLocation: Location(name: "Siem Reap", country: Country.cambodia),
         departureDate: DateTime.now().add(Duration(hours: 20)),
         arrivalDateTime: DateTime.now().add(Duration(hours: 22)),
-        driver: users[3],
+        driver: driver[3],
         availableSeats: 2,
         pricePerSeat: 15.0,
         petAccepted: RidesFilter(petAccepted: true),
@@ -106,7 +106,7 @@ class MockRidesRepository extends RidesRepository {
         arrivalLocation: Location(name: "Siem Reap", country: Country.cambodia),
         departureDate: DateTime.now().add(Duration(hours: 5)),
         arrivalDateTime: DateTime.now().add(Duration(hours: 8)),
-        driver: users[4],
+        driver: driver[4],
         availableSeats: 1,
         pricePerSeat: 9.0,
         petAccepted: RidesFilter(petAccepted: false),
