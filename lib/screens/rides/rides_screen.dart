@@ -36,13 +36,14 @@ class _RidesScreenState extends State<RidesScreen> {
   //
    RidesFilter currentFilter = RidesFilter( petAccepted: false);
    // RideSortType sortType = RideSortType.earliestDeparture;
+  List<Ride> get matchingRides => RidesService.instance.getRidesFor(
+      currentPreference, currentFilter);
   @override
   void initState() {
     super.initState();
     currentPreference = RidePrefService.instance.currentPreference!;
   }
 
-  List<Ride> get matchingRides => RidesService.getRidesFor(currentPreference,currentFilter);
 
   void onBackPressed() {
     Navigator.of(context).pop(); //  Back to the previous view
@@ -60,7 +61,6 @@ class _RidesScreenState extends State<RidesScreen> {
           // Step 2: Refresh the UI with the new preference
           setState(() {
             currentPreference = updatedPreference;
-            
           });
 
           // Step 3: Close the modal

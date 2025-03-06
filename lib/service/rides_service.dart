@@ -46,10 +46,19 @@ class RidesService {
     return repository.getRides(preference, filter);
   }
 
-  static List<Ride> getRidesFor(RidePreference currentPreference,  [RidesFilter? newFilter]) {
-    return _instance!.getRides(currentPreference, newFilter);
+  // static List<Ride> getRidesFor(RidePreference currentPreference,  [RidesFilter? newFilter]) {
+  //   return _instance!.getRides(currentPreference, newFilter);
+  // }
+  List<Ride> getRidesFor(RidePreference preferences, RidesFilter? filter) {
+    List<Ride> matchingRides = repository
+        .getRides(preferences, filter)
+        .where((ride) =>
+    ride.departureLocation == preferences.departure &&
+        ride.arrivalLocation == preferences.arrival &&
+        (filter == null || ride.petAccepted.petAccepted == filter.petAccepted))
+        .toList();
+    return matchingRides;
   }
-
 }
 class RidesFilter {
   final bool petAccepted;
