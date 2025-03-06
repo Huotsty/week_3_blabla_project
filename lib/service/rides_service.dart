@@ -49,6 +49,7 @@ class RidesService {
   static List<Ride> getRidesFor(RidePreference currentPreference,  [RidesFilter? newFilter]) {
     return _instance!.getRides(currentPreference, newFilter);
   }
+  
 }
 class RidesFilter {
   final bool petAccepted;
